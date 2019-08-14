@@ -2,7 +2,6 @@
 {
     public enum VehicleType
     {
-        None,
         Any,
         Bike,
         Car
