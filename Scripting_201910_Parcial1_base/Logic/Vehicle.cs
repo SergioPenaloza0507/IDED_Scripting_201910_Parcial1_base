@@ -14,7 +14,15 @@
         {
             get
             {
-                return 0F;
+                if(CurrentPart == null)
+                {
+                    return baseMaxSpeed;
+                }
+                else
+                {
+                    return baseMaxSpeed * (1 + CurrentPart.SpeedBonus);
+                }
+                
             }
         }
 
@@ -35,6 +43,8 @@
 
             if (Type == part.Type || part.Type == VehicleType.Any)
             {
+                CurrentPart = part;
+                result = true;
             }
 
             return result;
@@ -42,6 +52,12 @@
 
         public void Upgrade()
         {
+            if(Level <= 3)
+            {
+                Level++;
+                baseMaxSpeed = ((0.5F * Level));
+                CurrentPart.Upgrade();
+            }
         }
     }
 }
